@@ -10,6 +10,8 @@ public class player : MonoBehaviour
 
     public Transform camera;
 
+    private Rigidbody _rb;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -22,13 +24,19 @@ public class player : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        Vector3 dir = new Vector3(x, 0, -y) * velocity;
+        Vector3 dir = new Vector3(x, 0, y) * velocity;
 
         transform.Translate(dir * Time.deltaTime);
 
         transform.Rotate(new Vector3(
             0,
             mouseX * rotation * Time.deltaTime,
+            0
+        ));
+
+        camera.Rotate(new Vector3(
+            -(mouseY * rotation * Time.deltaTime),
+            0,
             0
         ));
 
